@@ -8,8 +8,13 @@
 
 (package-initialize)
 
+(global-set-key (kbd "C-x <up>") 'windmove-up)
+(global-set-key (kbd "C-x <down>") 'windmove-down)
+(global-set-key (kbd "C-x <right>") 'windmove-right)
+(global-set-key (kbd "C-x <left>") 'windmove-left)
+
 ;라인넘버 켜기
-(global-linum-mode 1)
+;(global-linum-mode 1)
 
 ;indent-for-comment
 (global-set-key [f5] 'indent-for-tab-command)
@@ -38,7 +43,7 @@
 (global-set-key [f9] 'tabbar-backward)
 (global-set-key [f10] 'tabbar-forward) ;; tabbar.el, put all the buffers on the tabs.
 
-(global-auto-complete-mode)
+;(global-auto-complete-mode)
 (require 'auto-complete)
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
@@ -52,12 +57,19 @@
 ;rvm
 (global-set-key (kbd "C-c r a") 'rvm-activate-corresponding-ruby)
 
+(global-set-key (kbd "C-x `") 'flymake-mode)
+
+
 ;project manage
 ;global
-;(require 'projectile)
+(require 'projectile)
 (projectile-global-mode)
 (add-hook 'ruby-mode-hook 'projectile-on)
-(add-hook 'html-mode-hook 'projectile-on)
+
+(add-hook 'html-mode-hook 'linum-mode)
+(add-hook 'coffee-mode-hook 'linum-mode)
+(add-hook 'ruby-mode-hook 'linum-mode)
+
 
 ;ido-mode flx-ido
 ;Display ido results vertically, rather than horizontally
@@ -70,25 +82,30 @@
 (add-hook 'ido-setup-hook 'ido-define-keys)
 (add-hook 'projectile-mode-hook 'projectile-rails-on)
 
+;(remove-hook 'ruby-mode-hook 'auto-complete-mode)
 ;Intelligent Code navigation and Completion with Robe
-;(require 'robe)
-;(add-hook 'ruby-mode-hook 'robe-mode)
-;(eval-after-load 'company
-;  '(push 'company-robe company-backends))
-;(add-hook 'robe-mode-hook 'ac-robe-setup)
-;
-;(defadvice inf-ruby-console-auto (before activate-rvm-for-robe activate)
-;  (rvm-activate-corresponding-ruby))
-;(require 'company)
-;(global-company-mode t)
-;(push 'company-robe company-backends)
+(require 'robe)
+(add-hook 'ruby-mode-hook 'robe-mode)
+(eval-after-load 'company
+  '(push 'company-robe company-backends))
+(add-hook 'robe-mode-hook 'ac-robe-setup)
+
+(defadvice inf-ruby-console-auto (before activate-rvm-for-robe activate)
+  (rvm-activate-corresponding-ruby))
+(require 'company)
+(global-company-mode t)
+(push 'company-robe company-backends)
 
 
 ;ruby ac
-(add-hook 'ruby-mode-hook 'auth-complete-mode)
+;(remove-hook 'ruby-mode-hook 'auto-complete-mode)
 ;ruby syntax
+
 (add-hook 'ruby-mode-hook 'flymake-ruby-load)
-;(setq ruby-deep-indent-paren nil)
+(setq ruby-deep-indent-paren nil)
+;(flymake-stop-all-syntax-checks)
+
+;(remove-hook 'ruby-mode-hook 'flymake-ruby-load)
 
 ;html ac
 (add-hook 'html-mode-hook 'auto-complete-mode)
@@ -110,3 +127,36 @@
 
 (require 'css-mode)
 (add-to-list 'auto-mode-alist '("\\.scss\\'" . css-mode))
+
+
+(defun rgrep-fullscreen (regexp &optional files dir confirm)
+  "Open grep in full screen, saving windows."
+  (interactive
+   (progn
+     (grep-compute-defaults)
+     (cond
+      ((and grep-find-command (equal current-prefix-arg '(16)))
+       (list (read-from-minibuffer "Run: " grep-find-command
+                                   nil nil 'grep-find-history)))
+      ((not grep-find-template)
+       (error "grep.el: No `grep-find-template' available"))
+      (t (let* ((regexp (grep-read-regexp))
+                (files (grep-read-files regexp))
+                (dir (ido-read-directory-name "Base directory: "
+                                              nil default-directory t))
+                (confirm (equal current-prefix-arg '(4))))
+           (list regexp files dir confirm))))))
+  (window-configuration-to-register ?$)
+  (rgrep regexp files dir confirm)
+  (switch-to-buffer "*grep*")
+  (delete-other-windows)
+  (beginning-of-buffer))
+
+
+(defun findMyLetter (x)
+  "inline doc string"
+  (interactive "sEnter regexp: ")
+  (rgrep x "*.*" "~/myletter/app")
+)
+(global-set-key (kbd "C-x C-r") 'findMyLetter)
+
