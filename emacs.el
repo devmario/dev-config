@@ -15,14 +15,14 @@
        (package-install j)))
    i))
 
-(auto-install 'eshell 'neotree 'tabbar 'auto-complete 'magit
+(auto-install 'eshell 'neotree 'tabbar 'auto-complete 'magit 'linum-relative
 	      'rust-mode 'flymake-rust
 	      'flylisp 'flymake 'flycheck
 	      'company 'projectile 'ido 'robe
 	      'ruby-mode 'inf-ruby 'rvm 'flymake-ruby 'projectile-rails
 	      'coffee-mode 'css-mode 'web-mode)
 
-; change magit diff colors
+; magit face
 (eval-after-load 'magit
   '(progn
      (set-face-foreground 'magit-diff-add "green3")
@@ -45,68 +45,6 @@
   (set-cursor-color "#ffffff"))
 (blink-cursor-mode t)
 
-; flymake emacs lisp
-(defun flymake-elisp-init ()
-  (unless (string-match "^ " (buffer-name))
-    (let* ((temp-file   (flymake-init-create-temp-buffer-copy
-                         'flymake-create-temp-inplace))
-           (local-file  (file-relative-name
-                         temp-file
-                         (file-name-directory buffer-file-name))))
-      (list
-       (expand-file-name invocation-name invocation-directory)
-       (list
-        "-Q" "--batch" "--eval" 
-        (prin1-to-string
-         (quote
-          (dolist (file command-line-args-left)
-            (with-temp-buffer
-              (insert-file-contents file)
-              (condition-case data
-                  (scan-sexps (point-min) (point-max))
-                (scan-error
-                 (goto-char(nth 2 data))
-                 (princ (format "%s:%s: error: Unmatched bracket or quote\n"
-                                file (line-number-at-pos)))))))
-          )
-         )
-        local-file)))))
-
-(push '("\\.el$" flymake-elisp-init) flymake-allowed-file-name-masks)
-(add-hook 'emacs-lisp-mode-hook
-          (function (lambda () (if buffer-file-name (flymake-mode)))))
-
-; auto complete ielm
-(defun emacs-lisp-auto-complete ()
-  (setq ac-sources '(ac-source-functions
-                     ac-source-variables
-                     ac-source-features
-                     ac-source-symbols
-                     ac-source-words-in-same-mode-buffers))
-  (add-to-list 'ac-modes 'emacs-lisp-mode)
-  (auto-complete-mode 1))
-
-(add-hook 'emacs-lisp-mode-hook 'emacs-lisp-auto-complete)
-
-; emacs lisp hook
-(add-hook 'emacs-lisp-mode-hook 'linum-mode)
-(add-hook 'emacs-lisp-mode-hook 'hs-minor-mode)
-
-; auto mode emacs lisp
-(add-to-list 'auto-mode-alist '("\\.el\\'" . emacs-lisp-mode))
-
-; auto mode web
-(add-to-list 'auto-mode-alist '("\\.html?\\'" . web-mode))
-
-; web mode hook
-(add-hook 'web-mode-hook 'auto-complete-mode)
-
-; web mode indent offset
-(setq-default web-mode-markup-indent-offset tab-width)
-(setq-default web-mode-css-indent-offset tab-width)
-(setq-default web-mode-code-indent-offset tab-width)
-(setq-default web-mode-sql-indent-offset tab-width)
-
 ; key setup
 (defun key-setup (&rest i)
   (mapcar
@@ -126,6 +64,10 @@
 	   '("C-c g <right>" . tabbar-forward-group)
 	   '("C-c <left>" . tabbar-backward)
 	   '("C-c <right>" . tabbar-forward))
+
+(require 'linum-relative)
+(linum-relative-toggle)
+(key-setup '("C-c l" . linum-mode))
 
 ; tabbar face
 (set-face-attribute
@@ -149,6 +91,7 @@
  :box '(:line-width 1 :color "white" :style nil))
 (set-face-attribute
  'tabbar-button nil
+ :foreground "black"
  :box '(:line-width 1 :color "gray20" :style nil))
 (set-face-attribute
  'tabbar-separator nil
@@ -186,11 +129,49 @@
 ; xterm mouse mode
 (xterm-mouse-mode)
 
-(if (display-graphic-p)
-    (progn
-      (message "graphic"))
-  (message "none graphic"))
+; elisp
+(require 'auto-complete)
+(defun emacs-lisp-additional ()
+  (setq ac-sources '(ac-source-functions
+                     ac-source-variables
+                     ac-source-features
+                     ac-source-symbols
+                     ac-source-words-in-same-mode-buffers))
+  (add-to-list 'ac-modes 'emacs-lisp-mode)
+  (auto-complete-mode 1)
+  (hs-minor-mode 1))
+(add-hook 'emacs-lisp-mode-hook 'emacs-lisp-additional)
+(add-to-list 'auto-mode-alist '("\\.el\\'" . emacs-lisp-mode))
 
-(message "%s" window-system)
+; flymake emacs lisp
+(require 'flymake)
+(defun flymake-elisp-init ()
+  (unless (string-match "^ " (buffer-name))
+    (let* ((temp-file   (flymake-init-create-temp-buffer-copy
+                         'flymake-create-temp-inplace))
+           (local-file  (file-relative-name
+                         temp-file
+                         (file-name-directory buffer-file-name))))
+      (list
+       (expand-file-name invocation-name invocation-directory)
+       (list
+        "-Q" "--batch" "--eval" 
+        (prin1-to-string
+         (quote
+          (dolist (file command-line-args-left)
+            (with-temp-buffer
+              (insert-file-contents file)
+              (condition-case data
+                  (scan-sexps (point-min) (point-max))
+                (scan-error
+                 (goto-char(nth 2 data))
+                 (princ (format "%s:%s: error: Unmatched bracket or quote\n"
+                                file (line-number-at-pos)))))))
+          )
+         )
+        local-file)))))
+(push '("\\.el$" flymake-elisp-init) flymake-allowed-file-name-masks)
+(add-hook 'emacs-lisp-mode-hook
+          (function (lambda () (if buffer-file-name (flymake-mode)))))
 
 (message "Devmario's Emacs enviropment load up finished!")
