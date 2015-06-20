@@ -22,7 +22,6 @@
 	      'ruby-mode 'inf-ruby 'rvm 'flymake-ruby 'projectile-rails
 	      'coffee-mode 'css-mode 'web-mode)
 
-<<<<<<< HEAD
 ; change magit diff colors
 (eval-after-load 'magit
   '(progn
@@ -40,8 +39,6 @@
      (set-face-foreground 'diff-added "green4")
      (set-face-foreground 'diff-removed "red3")))
 
-=======
->>>>>>> d409dee16cf6c2101c0632406dfb9afefecac9bc
 ; cursor
 (when (display-graphic-p)
   (setq-default cursor-type 'bar)
