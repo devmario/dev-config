@@ -14,13 +14,12 @@
 	 nil
        (package-install j)))
    i))
-
 (auto-install 'eshell 'neotree 'tabbar 'auto-complete 'magit 'linum-relative
-	      'rust-mode 'flymake-rust
+	      'rust-mode 'flymake-rust 'ac-html
 	      'flylisp 'flymake 'flycheck
 	      'company 'projectile 'ido 'robe
 	      'ruby-mode 'inf-ruby 'rvm 'flymake-ruby 'projectile-rails
-	      'coffee-mode 'css-mode 'web-mode)
+	      'coffee-mode 'css-mode 'web-mode 'flymake-coffee)
 
 ; magit face
 (eval-after-load 'magit
@@ -65,9 +64,11 @@
 	   '("C-c <left>" . tabbar-backward)
 	   '("C-c <right>" . tabbar-forward))
 
+; linum toggle
 (require 'linum-relative)
 (linum-relative-toggle)
-(key-setup '("C-c l" . linum-mode))
+(key-setup '("C-c l l" . linum-mode)
+	   '("C-c l r" . linum-relative-toggle))
 
 ; tabbar face
 (set-face-attribute
@@ -126,52 +127,30 @@
 (require 'ido)
 (ido-mode t)
 
+; ido vertical
+(setq ido-decorations (quote ("\n-> " "" "\n   " "\n   ..." "[" "]" " [No match]" " [Matched]" " [Not readable]" " [Too big]" " [Confirm]")))
+(defun ido-disable-line-truncation () (set (make-local-variable 'truncate-lines) nil))
+(add-hook 'ido-minibuffer-setup-hook 'ido-disable-line-truncation)
+(defun ido-define-keys ()
+  (define-key ido-completion-map (kbd "C-n") 'ido-next-match)
+  (define-key ido-completion-map (kbd "C-p") 'ido-prev-match))
+(add-hook 'ido-setup-hook 'ido-define-keys)
+
+; M-x mode ido
+(global-set-key
+     "\M-x"
+     (lambda ()
+       (interactive)
+       (call-interactively
+        (intern
+         (ido-completing-read
+          "M-x "
+          (all-completions "" obarray 'commandp))))))
+
 ; xterm mouse mode
 (xterm-mouse-mode)
 
-; elisp
-(require 'auto-complete)
-(defun emacs-lisp-additional ()
-  (setq ac-sources '(ac-source-functions
-                     ac-source-variables
-                     ac-source-features
-                     ac-source-symbols
-                     ac-source-words-in-same-mode-buffers))
-  (add-to-list 'ac-modes 'emacs-lisp-mode)
-  (auto-complete-mode 1)
-  (hs-minor-mode 1))
-(add-hook 'emacs-lisp-mode-hook 'emacs-lisp-additional)
-(add-to-list 'auto-mode-alist '("\\.el\\'" . emacs-lisp-mode))
-
-; flymake emacs lisp
-(require 'flymake)
-(defun flymake-elisp-init ()
-  (unless (string-match "^ " (buffer-name))
-    (let* ((temp-file   (flymake-init-create-temp-buffer-copy
-                         'flymake-create-temp-inplace))
-           (local-file  (file-relative-name
-                         temp-file
-                         (file-name-directory buffer-file-name))))
-      (list
-       (expand-file-name invocation-name invocation-directory)
-       (list
-        "-Q" "--batch" "--eval" 
-        (prin1-to-string
-         (quote
-          (dolist (file command-line-args-left)
-            (with-temp-buffer
-              (insert-file-contents file)
-              (condition-case data
-                  (scan-sexps (point-min) (point-max))
-                (scan-error
-                 (goto-char(nth 2 data))
-                 (princ (format "%s:%s: error: Unmatched bracket or quote\n"
-                                file (line-number-at-pos)))))))
-          )
-         )
-        local-file)))))
-(push '("\\.el$" flymake-elisp-init) flymake-allowed-file-name-masks)
-(add-hook 'emacs-lisp-mode-hook
-          (function (lambda () (if buffer-file-name (flymake-mode)))))
+(load-file "elisp.el")
+(load-file "rails.el")
 
 (message "Devmario's Emacs enviropment load up finished!")
