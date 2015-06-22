@@ -17,9 +17,9 @@
 (auto-install 'eshell 'neotree 'tabbar 'auto-complete 'magit 'linum-relative
 	      'rust-mode 'flymake-rust 'ac-html
 	      'flylisp 'flymake 'flycheck
-	      'company 'projectile 'ido 'robe
+	      'company 'projectile 'ido 'robe 'haml-mode 'flymake-haml
 	      'ruby-mode 'inf-ruby 'rvm 'flymake-ruby 'projectile-rails
-	      'coffee-mode 'css-mode 'web-mode 'flymake-coffee)
+	      'coffee-mode 'jquery-doc 'css-mode 'web-mode 'flymake-coffee)
 
 ; magit face
 (eval-after-load 'magit
@@ -66,7 +66,6 @@
 
 ; linum toggle
 (require 'linum-relative)
-(linum-relative-toggle)
 (key-setup '("C-c l l" . linum-mode)
 	   '("C-c l r" . linum-relative-toggle))
 
@@ -150,7 +149,15 @@
 ; xterm mouse mode
 (xterm-mouse-mode)
 
-(load-file "elisp.el")
-(load-file "rails.el")
+; ac bug fix
+(require 'auto-complete-config)
+(ac-config-default)
+(ac-linum-workaround)
+(setq ac-stop-flymake-on-completing 1)
+(setq ac-use-quick-help nil)
+(ac-syntax-checker-workaround)
+
+(load-file "~/dev-config/elisp.el")
+(load-file "~/dev-config/rails.el")
 
 (message "Devmario's Emacs enviropment load up finished!")

@@ -42,5 +42,3 @@
 (push '("\\.el$" flymake-elisp-init) flymake-allowed-file-name-masks)
 (add-hook 'emacs-lisp-mode-hook
           (function (lambda () (if buffer-file-name (flymake-mode)))))
-
-; jump emacs lisp
