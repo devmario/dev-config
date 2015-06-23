@@ -154,9 +154,24 @@
 (ac-config-default)
 (ac-linum-workaround)
 (setq ac-stop-flymake-on-completing 1)
-(setq ac-use-quick-help nil)
+(setq ac-use-quick-help 1)
 (ac-syntax-checker-workaround)
 
+; sql
+(defcustom sql-mysql-data-dictionary
+     "select concat('\\(', '\\\"', table_name, '\\\" \\\"', column_name, '\\\"', '\\)') 
+     from information_schema.columns 
+     order by table_name;"
+     "SQL Statement to determine all tables and columns."
+     :group 'SQL
+     :type 'string)
+(defun sql-mysql-data-dictionary ()
+     (interactive)
+     ;; FIXME No cleanup
+     (setq sql-data-dictionary
+        (sql-data-dictionary sql-mysql-data-dictionary)))
+
+(load-file "~/dev-config/sql-complete.el")
 (load-file "~/dev-config/elisp.el")
 (load-file "~/dev-config/rails.el")
 
