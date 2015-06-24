@@ -21,7 +21,7 @@
 (require 'robe)
 (require 'projectile)
 (require 'projectile-rails)
-(defun on-mode-rains()
+(defun on-mode-rails()
 	  (auto-complete-mode 1)
 		(projectile-mode 1)
 		(projectile-rails-on)
@@ -30,14 +30,14 @@
   (setq ac-sources '(ac-source-words-in-same-mode-buffers
 										 ac-source-filename
 										 ac-source-files-in-current-dir))
-	(on-mode-rains))
+	(on-mode-rails))
 (defun rails-ruby-hook()
   (setq ac-sources '(ac-source-words-in-same-mode-buffers
 										 ac-source-filename
 										 ac-source-files-in-current-dir))
   (ac-robe-setup)
   (robe-mode)
-	(on-mode-rains))
+	(on-mode-rails))
 (require 'ac-html)
 (defun haml-ac-hook()
   (setq ac-sources '(ac-source-words-in-same-mode-buffers
@@ -48,9 +48,9 @@
 										 ac-source-html-attribute-value
 										 ac-source-css-property))
 	(ac-haml-enable)
-	(ac-robe-setup)
-	(robe-mode)
-	(on-mode-rains))
+	;(ac-robe-setup)
+	;(robe-mode)
+	(on-mode-rails))
 (defun javascript-my-hook()
 	(setq ac-sources '(ac-source-words-in-same-mode-buffers
 										 ac-source-filename
@@ -60,7 +60,7 @@
 										 ac-source-html-attribute-value
 										 ac-source-css-property
 										 ac-source-jquery))
-	(on-mode-rains))
+	(on-mode-rails))
 (add-hook 'ruby-mode-hook 'rails-ruby-hook)
 (add-hook 'web-mode-hook 'global-rails-hook)
 (add-hook 'html-mode-hook 'global-rails-hook)
@@ -80,7 +80,6 @@
              '("html" . (ac-source-html-attribute-value
                          ac-source-html-tag
                          ac-source-html-attribute)))
-(setq-default tab-width 2)
 (add-to-list 'auto-mode-alist '("\\.html.erb\\'" . web-mode))
 
 ; scss

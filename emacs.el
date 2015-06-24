@@ -2,8 +2,8 @@
 (require 'package)
 (setq package-archives
       '(("gnu" . "http://elpa.gnu.org/packages/")
-	("marmalade" . "https://marmalade-repo.org/packages/")
-	("melpa" . "http://melpa.org/packages/")))
+				("marmalade" . "https://marmalade-repo.org/packages/")
+				("melpa" . "http://melpa.org/packages/")))
 (package-initialize)
 
 ; auto install
@@ -14,12 +14,13 @@
 	 nil
        (package-install j)))
    i))
-(auto-install 'eshell 'neotree 'tabbar 'auto-complete 'magit 'linum-relative
-	      'rust-mode 'flymake-rust 'ac-html
-	      'flylisp 'flymake 'flycheck
-	      'company 'projectile 'ido 'robe 'haml-mode 'flymake-haml
-	      'ruby-mode 'inf-ruby 'rvm 'flymake-ruby 'projectile-rails
-	      'coffee-mode 'jquery-doc 'css-mode 'web-mode 'flymake-coffee)
+(auto-install 'iedit 'eshell 'neotree 'tabbar 'auto-complete 'magit 'linum-relative
+							'rust-mode 'flymake-rust 'ac-html 'yasnippet 'auto-complete-c-headers
+							'flymake-google-cpplint 'google-c-style
+							'flylisp 'flymake 'flycheck
+							'company 'projectile 'ido 'robe 'haml-mode 'flymake-haml
+							'ruby-mode 'inf-ruby 'rvm 'flymake-ruby 'projectile-rails
+							'coffee-mode 'jquery-doc 'css-mode 'web-mode 'flymake-coffee)
 
 ; magit face
 (eval-after-load 'magit
@@ -50,6 +51,8 @@
    (lambda (j)
      (global-set-key (kbd (car j)) (cdr j)))
    i))
+
+(define-key global-map (kbd "C-c ;") 'iedit-mode)
 
 ; window move
 (key-setup '("C-x <up>" . windmove-up)
@@ -157,6 +160,7 @@
 (setq ac-use-quick-help 1)
 (ac-syntax-checker-workaround)
 
+; TODO with sql-complete => http://www.emacswiki.org/emacs/SqlComplete
 ; sql
 (defcustom sql-mysql-data-dictionary
      "select concat('\\(', '\\\"', table_name, '\\\" \\\"', column_name, '\\\"', '\\)') 
@@ -171,8 +175,11 @@
      (setq sql-data-dictionary
         (sql-data-dictionary sql-mysql-data-dictionary)))
 
+(setq-default tab-width 2)
+
 (load-file "~/dev-config/sql-complete.el")
 (load-file "~/dev-config/elisp.el")
 (load-file "~/dev-config/rails.el")
+(load-file "~/dev-config/c++.el")
 
 (message "Devmario's Emacs enviropment load up finished!")
