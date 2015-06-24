@@ -40,6 +40,12 @@
 (add-hook 'c-mode-common-hook 'google-make-newline-indent)
 
 (defun devmario:c/c++-semantic()
+	(add-to-list 'semantic-default-submodes 'global-semanticdb-minor-mode)
+	(add-to-list 'semantic-default-submodes 'global-semantic-mru-bookmark-mode)
+	(add-to-list 'semantic-default-submodes 'global-semantic-idle-scheduler-mode)
+	(add-to-list 'semantic-default-submodes 'global-semantic-idle-summary-mode)
+	(add-to-list 'semantic-default-submodes 'global-semantic-stickyfunc-mode)
+
 	(semantic-mode 1)
 	(add-to-list 'ac-sources 'ac-source-semantic))
 (add-hook 'c-mode-common-hook 'devmario:c/c++-semantic)
