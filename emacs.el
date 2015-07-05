@@ -75,7 +75,7 @@
 																				; linum toggle
 (require 'linum-relative)
 (key-setup '("C-c l l" . linum-mode)
-					 '("C-c l r" . linum-relative-toggle))
+	   '("C-c l r" . linum-relative-toggle))
 
 																				; tabbar face
 (unless (display-graphic-p)
@@ -121,6 +121,7 @@
 				 label (max 1 (/ (window-width)
 												 (length (tabbar-view
 																	(tabbar-current-tabset))))))))))
+
 (tabbar-mode 1)
 
 																				; neotree
