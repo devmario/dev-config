@@ -25,8 +25,9 @@
 							'ruby-mode 'inf-ruby 'rvm 'flymake-ruby 'projectile-rails
 							'coffee-mode 'jquery-doc 'css-mode 'web-mode 'flymake-coffee)
 
+
 																				; magit face
-(unless (display-graphic-p)
+(when (not window-system)
 	(eval-after-load 'magit
 		'(progn
 			 (set-face-foreground 'magit-diff-add "green3")
@@ -183,13 +184,13 @@
 (setq-default tab-width 2)
 
 																				; load dev env
-(if (equal system-type "darwin")
+(if (equal system-type 'darwin)
 		(setq devmario::rootDir "~/Documents/dev-config/")
 	(setq devmario::rootDir "~/dev-config/"))
 
-(load-file (concatenate devmario::rootDir "sql-complete.el"))
-(load-file (concatenate devmario::rootDir "elisp.el"))
-(load-file (concatenate devmario::rootDir "rails.el"))
-(load-file (concatenate devmario::rootDir "c++.el"))
+(load-file (concat devmario::rootDir "sql-complete.el"))
+(load-file (concat devmario::rootDir "elisp.el"))
+(load-file (concat devmario::rootDir "rails.el"))
+(load-file (concat devmario::rootDir "c++.el"))
 
 (message "Devmario's Emacs enviropment load up finished!")
