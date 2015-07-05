@@ -127,6 +127,7 @@
 																				; neotree
 (require 'neotree)
 (neotree-show)
+(set-face-foreground 'neo-file-link-face "white")
 
 																				; scroll bar
 (require 'scroll-bar)
