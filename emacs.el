@@ -58,8 +58,6 @@
 (load-file (concat devmario::rootDir "rails.el"))
 (load-file (concat devmario::rootDir "sql-complete.el"))
 
-(load-file (concat devmario::rootDir "term.el"))
-
 ;; check emacs version
 (if (version< emacs-version "24.4")
     (progn (message "is before 24.4"))
