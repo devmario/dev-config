@@ -1,4 +1,6 @@
-; ac elisp
+(auto-install 'auto-complete 'yasnippet 'flymake 'flycheck)
+
+;; ac elisp
 (require 'auto-complete)
 (defun emacs-lisp-additional ()
   (setq ac-sources '(ac-source-functions
@@ -12,7 +14,7 @@
 (add-hook 'emacs-lisp-mode-hook 'emacs-lisp-additional)
 (add-to-list 'auto-mode-alist '("\\.el\\'" . emacs-lisp-mode))
 
-; flymake emacs lisp
+;; flymake emacs lisp
 (require 'flymake)
 (defun flymake-elisp-init ()
   (unless (string-match "^ " (buffer-name))

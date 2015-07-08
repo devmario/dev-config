@@ -1,4 +1,4 @@
-;http://barisyuksel.com/cppmode/.emacs
+;; http://barisyuksel.com/cppmode/.emacs
 (auto-install 'auto-complete-c-headers 'yasnippet 'auto-complete 'flymake-google-cpplint 'flymake-cursor 'google-c-style 'cedet)
 
 (require 'yasnippet)
@@ -11,14 +11,10 @@
 	(require 'auto-complete-c-headers)
 	(add-to-list 'ac-sources 'ac-source-c-headers)
 	; gcc -xc++ -E -v -
-	(add-to-list 'achead:include-directories '"/usr/include/c++/4.8")
-	(add-to-list 'achead:include-directories '"/usr/include/c++/4.8")
-	(add-to-list 'achead:include-directories '"/usr/include/x86_64-linux-gnu/c++/4.8")
-	(add-to-list 'achead:include-directories '"/usr/include/c++/4.8/backward")
-	(add-to-list 'achead:include-directories '"/usr/lib/gcc/x86_64-linux-gnu/4.8/include")
+	(add-to-list 'achead:include-directories '"/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/include/c++/v1")
 	(add-to-list 'achead:include-directories '"/usr/local/include")
-	(add-to-list 'achead:include-directories '"/usr/lib/gcc/x86_64-linux-gnu/4.8/include-fixed")
-	(add-to-list 'achead:include-directories '"/usr/include/x86_64-linux-gnu")
+	(add-to-list 'achead:include-directories '"/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/lib/clang/6.1.0/include")
+	(add-to-list 'achead:include-directories '"/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/include")
 	(add-to-list 'achead:include-directories '"/usr/include"))
 
 (add-hook 'c-mode-hook 'devmario:c/c++-ac)

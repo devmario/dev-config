@@ -1,197 +1,87 @@
-																				; package list
+;; DONE eshell include bash ENV
+;; TODO fuzzy rgrep
+;; TODO fuzzy auto-complete
+;; https://github.com/grizzl/fiplr
+;; http://stackoverflow.com/questions/1478616/is-there-a-way-to-get-emacss-anything-to-do-fuzzy-searches
+;; TODO php html javascript coffeescript mysql wordpress nginx
+;; TODO C# Fuse Unity
+;; TODO C/C++ ObjectiveC swift Xcode iOS MAC
+;; TODO Java maven Eclipse Android
+;; TODO sh bashe
+;; TODO SQL
+;; TODO rust
+;; TODO python
+
+;; BUG eshell auto complete error
+;; TODO eshell auto complete man doc popup
+
+;; setup repos
 (require 'package)
 (setq package-archives
       '(("gnu" . "http://elpa.gnu.org/packages/")
-				("marmalade" . "https://marmalade-repo.org/packages/")
-				("melpa" . "http://melpa.org/packages/")))
+		("marmalade" . "https://marmalade-repo.org/packages/")
+		("melpa" . "http://melpa.org/packages/")))
 (package-initialize)
 
-																				; auto install
+;; include root(mac, linux)
+(if (equal system-type 'darwin)
+	(setq devmario::rootDir "~/Documents/dev-config/")
+  (setq devmario::rootDir "~/dev-config/"))
+
+;; include
 (defun auto-install (&rest i)
   (mapcar
    (lambda (j)
      (if (package-installed-p j)
-				 nil
+		 nil
        (package-install j)))
    i))
 
-																				; default
-(auto-install 'iedit 'eshell 'neotree 'tabbar 'auto-complete 'magit 'linum-relative
-							'yasnippet 'flymake 'flycheck 'company 'projectile 'ido)
+;; not partial package
+(auto-install 'rust-mode 'flymake-rust 'ac-html 'haml-mode 'flymake-haml 'coffee-mode 'jquery-doc 'css-mode 'web-mode 'flymake-coffee)
 
-(auto-install 'rust-mode 'flymake-rust 'ac-html 'auto-complete-c-headers
-							'flymake-google-cpplint 'google-c-style
-							'flylisp 'robe 'haml-mode 'flymake-haml
-							'ruby-mode 'inf-ruby 'rvm 'flymake-ruby 'projectile-rails
-							'coffee-mode 'jquery-doc 'css-mode 'web-mode 'flymake-coffee)
+;; util
+(load-file (concat devmario::rootDir "util.el"))
 
+;; auto-complete config
+(load-file (concat devmario::rootDir "auto-complete.el"))
 
-																				; magit face
-(when (not window-system)
-	(eval-after-load 'magit
-		'(progn
-			 (set-face-foreground 'magit-diff-add "green3")
-			 (set-face-foreground 'magit-diff-del "red3")
-			 (set-face-foreground 'magit-branch "red1")
-			 (set-face-foreground 'magit-log-head-label-remote "black")
-			 (set-face-foreground 'magit-log-head-label-local  "red")
-			 (when (not window-system)
-				 (set-face-background 'magit-item-highlight "black")
-				 (set-face-foreground 'magit-item-highlight "white"))))
-	(add-to-list 'auto-mode-alist '("COMMIT_EDITMEG$" . diff-mode))
-	(eval-after-load 'diff-mode
-		'(progn
-			 (set-face-foreground 'diff-added "green4")
-			 (set-face-foreground 'diff-removed "red3"))))
+;; shell
+(load-file (concat devmario::rootDir "shell.el"))
 
-																				; cursor
-(when (display-graphic-p)
-  (setq-default cursor-type 'bar)
-  (set-cursor-color "#ffffff"))
-(blink-cursor-mode t)
-
-																				; key setup
-(defun key-setup (&rest i)
-  (mapcar
-   (lambda (j)
-     (global-set-key (kbd (car j)) (cdr j)))
-   i))
-
-(define-key global-map (kbd "C-c ;") 'iedit-mode)
-
-																				; window move
-(key-setup '("C-x <up>" . windmove-up)
-					 '("C-x <down>" . windmove-down)
-					 '("C-x <right>" . windmove-right)
-					 '("C-x <left>" . windmove-left))
-
-																				; tabbar move
-(require 'tabbar)
-(key-setup '("C-c g <left>" . tabbar-backward-group)
-					 '("C-c g <right>" . tabbar-forward-group)
-					 '("C-c <left>" . tabbar-backward)
-					 '("C-c <right>" . tabbar-forward))
-
-																				; linum toggle
-(require 'linum-relative)
-(key-setup '("C-c l l" . linum-mode)
-	   '("C-c l r" . linum-relative-toggle))
-
-																				; tabbar face
-(unless (display-graphic-p)
-	(set-face-attribute
-	 'tabbar-default nil
-	 :background "gray60")
-	(set-face-attribute
-	 'tabbar-unselected nil
-	 :background "gray30"
-	 :foreground "white"
-	 :box '(:line-width 1 :color "gray30" :style nil))
-	(set-face-attribute
-	 'tabbar-selected nil
-	 :background "gray75"
-	 :foreground "black"
-	 :box '(:line-width 1 :color "gray75" :style nil))
-	(set-face-attribute
-	 'tabbar-highlight nil
-	 :background "white"
-	 :foreground "black"
-	 :underline nil
-	 :box '(:line-width 1 :color "white" :style nil))
-	(set-face-attribute
-	 'tabbar-button nil
-	 :foreground "black"
-	 :box '(:line-width 1 :color "gray20" :style nil))
-	(set-face-attribute
-	 'tabbar-separator nil
-	 :background "gray20"
-	 :height 0.6)
-	(set-face-attribute
-	 'tabbar-separator nil
-	 :height 0.7)
-	(custom-set-variables
-	 '(tabbar-separator (quote (1.0))))
-	(defun tabbar-buffer-tab-label (tab)
-		(let ((label  (if tabbar--buffer-show-groups
-											(format "[%s]  " (tabbar-tab-tabset tab))
-										(format "(%s)" (tabbar-tab-value tab)))))
-			(if tabbar-auto-scroll-flag
-					label
-				(tabbar-shorten
-				 label (max 1 (/ (window-width)
-												 (length (tabbar-view
-																	(tabbar-current-tabset))))))))))
-
-(tabbar-mode 1)
-
-																				; neotree
-(require 'neotree)
-(neotree-show)
-
-																				; scroll bar
-(require 'scroll-bar)
-(scroll-bar-mode t)
-
-																				; ido
-(require 'ido)
-(ido-mode t)
-
-																				; ido vertical
-(setq ido-decorations (quote ("\n-> " "" "\n   " "\n   ..." "[" "]" " [No match]" " [Matched]" " [Not readable]" " [Too big]" " [Confirm]")))
-(defun ido-disable-line-truncation () (set (make-local-variable 'truncate-lines) nil))
-(add-hook 'ido-minibuffer-setup-hook 'ido-disable-line-truncation)
-(defun ido-define-keys ()
-  (define-key ido-completion-map (kbd "C-n") 'ido-next-match)
-  (define-key ido-completion-map (kbd "C-p") 'ido-prev-match))
-(add-hook 'ido-setup-hook 'ido-define-keys)
-
-																				; M-x mode ido
-(global-set-key
- "\M-x"
- (lambda ()
-	 (interactive)
-	 (call-interactively
-		(intern
-		 (ido-completing-read
-			"M-x "
-			(all-completions "" obarray 'commandp))))))
-
-																				; xterm mouse mode
-(xterm-mouse-mode)
-
-																				; ac bug fix
-(require 'auto-complete-config)
-(ac-config-default)
-(ac-linum-workaround)
-(setq ac-stop-flymake-on-completing 1)
-(setq ac-use-quick-help 1)
-(ac-syntax-checker-workaround)
-
-																				; TODO with sql-complete => http://www.emacswiki.org/emacs/SqlComplete
-																				; sql
-(defcustom sql-mysql-data-dictionary
-	"select concat('\\(', '\\\"', table_name, '\\\" \\\"', column_name, '\\\"', '\\)') 
-     from information_schema.columns 
-     order by table_name;"
-	"SQL Statement to determine all tables and columns."
-	:group 'SQL
-	:type 'string)
-(defun sql-mysql-data-dictionary ()
-	(interactive)
-	;; FIXME No cleanup
-	(setq sql-data-dictionary
-        (sql-data-dictionary sql-mysql-data-dictionary)))
-
-(setq-default tab-width 2)
-
-																				; load dev env
-(if (equal system-type 'darwin)
-		(setq devmario::rootDir "~/Documents/dev-config/")
-	(setq devmario::rootDir "~/dev-config/"))
-
-(load-file (concat devmario::rootDir "sql-complete.el"))
+;; lang
 (load-file (concat devmario::rootDir "elisp.el"))
-(load-file (concat devmario::rootDir "rails.el"))
+
 (load-file (concat devmario::rootDir "c++.el"))
 
+; dev env
+(load-file (concat devmario::rootDir "rails.el"))
+(load-file (concat devmario::rootDir "sql-complete.el"))
+
+;; check emacs version
+(if (version< emacs-version "24.4")
+    (progn (message "is before 24.4"))
+  (progn (message "is 24.4 or after")))
+
+;; check emacs version
+(if (or 
+     (and (>= emacs-major-version 24) 
+          (>= emacs-minor-version 4))
+     (>= emacs-major-version 25))
+    (progn (message "is 24.4 or after"))
+  (progn (message "is before 24.4")))
+
+;; check OS type
+(cond
+ ((string-equal system-type "windows-nt") ; Microsoft Windows
+  (progn
+    (message "Microsoft Windows")))
+ ((string-equal system-type "darwin") ; Mac OS X
+  (progn
+    (message "Mac OS X")))
+ ((string-equal system-type "gnu/linux") ; linux
+  (progn
+    (message "Linux"))))
+
+;; done
 (message "Devmario's Emacs enviropment load up finished!")

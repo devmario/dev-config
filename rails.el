@@ -1,4 +1,6 @@
-; ruby shell
+(auto-install 'projectile-rails 'robe 'ruby-mode 'inf-ruby 'rvm 'flymake-ruby)
+
+;; ruby shell
 (require 'inf-ruby)
 (global-set-key (kbd "C-c r r") 'inf-ruby)
 
