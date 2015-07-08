@@ -46,8 +46,15 @@
 ;; auto-complete config
 (load-file (concat devmario::rootDir "auto-complete.el"))
 
+<<<<<<< HEAD
 ;; shell
 (load-file (concat devmario::rootDir "shell.el"))
+=======
+																				; neotree
+(require 'neotree)
+(neotree-show)
+(set-face-foreground 'neo-file-link-face "white")
+>>>>>>> b78fe513998c9ffda4e11daeff3a042bbe0e84e6
 
 ;; lang
 (load-file (concat devmario::rootDir "elisp.el"))
