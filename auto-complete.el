@@ -9,7 +9,8 @@
 (setq ac-auto-show-menu 0.1)
 (setq ac-quick-help-delay 0.1)
 (setq ac-auto-start 1)
-(setq ac-fuzzy-enable 1)
-(setq ac-use-fuzzy 1)
+;; 이거 두개 키면 모든창의 커서들 깜빡깜빡 왜이러냐...
+(setq ac-fuzzy-enable nil)
+(setq ac-use-fuzzy nil)
 
 

@@ -3,13 +3,15 @@
 ;; TODO fuzzy auto-complete
 ;; https://github.com/grizzl/fiplr
 ;; http://stackoverflow.com/questions/1478616/is-there-a-way-to-get-emacss-anything-to-do-fuzzy-searches
-;; TODO php html javascript coffeescript mysql wordpress nginx
+;; http://hamlphp.github.io/HamlPHP/
+;; https://github.com/alxlit/coffeescript-php
+;; TODO php html haml javascript coffeescript mysql wordpress nginx
 ;; TODO C# Fuse Unity
 ;; TODO C/C++ ObjectiveC swift Xcode iOS MAC
 ;; TODO Java maven Eclipse Android
-;; TODO sh bashe
+;; TODO sh bash
 ;; TODO SQL
-;; TODO rust
+;; TODO rust https://github.com/phildawes/racer
 ;; TODO python
 
 ;; BUG eshell auto complete error
@@ -46,17 +48,34 @@
 ;; auto-complete config
 (load-file (concat devmario::rootDir "auto-complete.el"))
 
-;; shell
+;; shell(eshell)
 (load-file (concat devmario::rootDir "shell.el"))
 
 ;; lang
 (load-file (concat devmario::rootDir "elisp.el"))
-
 (load-file (concat devmario::rootDir "c++.el"))
+(load-file (concat devmario::rootDir "rust.el"))
 
-; dev env
+(load-file (concat devmario::rootDir "php.el"))
+(load-file (concat devmario::rootDir "html.el"))
+(load-file (concat devmario::rootDir "javascript.el"))
+(load-file (concat devmario::rootDir "css.el"))
+
+(load-file (concat devmario::rootDir "coffeescript.el"))
+(load-file (concat devmario::rootDir "python.el"))
+(load-file (concat devmario::rootDir "ruby.el"))
+(load-file (concat devmario::rootDir "shellscript.el"))
+
+(load-file (concat devmario::rootDir "objective-c.el"))
+(load-file (concat devmario::rootDir "c#.el"))
+
+;; dev env
 (load-file (concat devmario::rootDir "rails.el"))
 (load-file (concat devmario::rootDir "sql-complete.el"))
+(load-file (concat devmario::rootDir "ios.el"))
+
+;; project
+
 
 ;; check emacs version
 (if (version< emacs-version "24.4")

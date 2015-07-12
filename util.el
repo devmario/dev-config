@@ -3,7 +3,7 @@
     (progn (auto-install 'egg))
   (progn (auto-install 'magit)))
 
-(auto-install 'iedit 'neotree 'tabbar 'linum-relative 'sr-speedbar 'company 'projectile 'ido 'flylisp 'flx-ido 'flx)
+(auto-install 'iedit 'neotree 'tabbar 'linum-relative 'sr-speedbar 'company 'projectile 'ido 'flylisp 'flx-ido 'flx 'ace-jump-mode 'browse-at-remote 'markdown-mode)
 
 ;; iedit
 (define-key global-map (kbd "C-c ;") 'iedit-mode)
@@ -24,9 +24,6 @@
 ;; linum
 (global-set-key (kbd "C-c l l") 'linum-mode)
 (global-set-key (kbd "C-c l r") 'linum-relative-toggle)
-
-;; scrollbar
-(scroll-bar-mode t)
 
 ;; ido
 (require 'flx-ido)
@@ -62,11 +59,10 @@
 ;; blink curtor
 (blink-cursor-mode t)
 
-;; mouse
-(xterm-mouse-mode t)
+;; ace-jump
+(define-key global-map (kbd "C-c SPC") 'ace-jump-mode)
 
-;; session save
-(desktop-save-mode t)
-
-;; eww history
-(add-hook 'eww-mode 'eww-history-mode)
+;; 이거 if체크 필요, 안돼는데 있음
+;; (scroll-bar-mode t)
+;; (xterm-mouse-mode t)
+;; (desktop-save-mode t)
