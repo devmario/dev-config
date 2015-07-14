@@ -40,7 +40,7 @@
    i))
 
 ;; not partial package
-(auto-install 'rust-mode 'flymake-rust 'ac-html 'haml-mode 'flymake-haml 'coffee-mode 'jquery-doc 'css-mode 'web-mode 'flymake-coffee)
+;; (auto-install 'rust-mode 'flymake-rust 'ac-html 'haml-mode 'flymake-haml 'coffee-mode 'jquery-doc 'css-mode 'web-mode 'flymake-coffee)
 
 ;; util
 (load-file (concat devmario::rootDir "util.el"))
