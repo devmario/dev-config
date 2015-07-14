@@ -85,5 +85,7 @@
 
 ;; (load-theme 'ir-black t)
 
-
-
+;; http://mwolson.org/static/doc/erc.html
+(erc-autojoin-enable)
+(setq erc-autojoin-channels-alist '(("irc.freenote.net" "#chief-founder")))
+;; (erc :server "52.69.162.111" :port "6667" :nick user-login-name :password "")
