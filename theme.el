@@ -1,3 +1,7 @@
+(auto-install 'ir-black-theme)
+
+(load-theme 'ir-black t)
+
 (let ((*mode-line-bg* "#202020")
 	  (*mode-line-fg* "#CCC")
 	  (*tabbar-default-fg* "#777")
@@ -7,9 +11,10 @@
    ;; GUI
    `(minibuffer-prompt ((t (:foreground "green"))))
    `(mode-line ((t (:background, *mode-line-bg* :foreground, "yellow"))))
-   `(mode-line-inactive ((t (:background, *mode-line-bg* :foreground, "black"))))
    `(vertical-border ((t (:background, *mode-line-bg* :foreground, "black"))))
-   `(menu ((t (:background, *mode-line-bg* :foreground, *mode-line-fg*))))
+
+   ;; ido flx
+   `(flx-highlight-face ((t (:foreground, "brightred" :underline, t))))
    
    ;; tabbar
    `(tabbar-default ((t (:background, *tabbar-default-bg* :foreground, *tabbar-default-fg*))))
