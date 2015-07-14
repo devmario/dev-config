@@ -1,9 +1,10 @@
 ;; magit only excute emacs version 24.4
 (if (version< emacs-version "24.4")
+	"24.4 부터만 magit 지원"
     (progn (auto-install 'egg))
   (progn (auto-install 'magit)))
 
-(auto-install 'iedit 'neotree 'tabbar 'linum-relative 'sr-speedbar 'company 'projectile 'ido 'flylisp 'flx-ido 'flx 'ace-jump-mode 'browse-at-remote 'markdown-mode)
+(auto-install 'iedit 'neotree 'tabbar 'linum-relative 'sr-speedbar 'company 'projectile 'ido 'flylisp 'flx-ido 'flx 'ace-jump-mode 'browse-at-remote 'markdown-mode 'ir-black-theme)
 
 ;; iedit
 (define-key global-map (kbd "C-c ;") 'iedit-mode)
@@ -56,13 +57,16 @@
 ;; tab width
 (setq-default tab-width 4)
 
-;; blink curtor
-(blink-cursor-mode t)
-
 ;; ace-jump
 (define-key global-map (kbd "C-c SPC") 'ace-jump-mode)
 
-;; 이거 if체크 필요, 안돼는데 있음
+;; 어두워서 안보여서 색상 바꿈
+;; (set-face-foreground 'minibuffer-prompt "green")
+
+;; 이거 if체크 필요
+;; (blink-cursor-mode t)
 ;; (scroll-bar-mode t)
 ;; (xterm-mouse-mode t)
 ;; (desktop-save-mode t)
+
+;; (load-theme 'ir-black t)

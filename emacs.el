@@ -45,6 +45,8 @@
 ;; util
 (load-file (concat devmario::rootDir "util.el"))
 
+(load-file (concat devmario::rootDir "theme.el"))
+
 ;; auto-complete config
 (load-file (concat devmario::rootDir "auto-complete.el"))
 
@@ -53,26 +55,27 @@
 
 ;; lang
 (load-file (concat devmario::rootDir "elisp.el"))
-(load-file (concat devmario::rootDir "c++.el"))
-(load-file (concat devmario::rootDir "rust.el"))
 
-(load-file (concat devmario::rootDir "php.el"))
-(load-file (concat devmario::rootDir "html.el"))
-(load-file (concat devmario::rootDir "javascript.el"))
-(load-file (concat devmario::rootDir "css.el"))
+;; (load-file (concat devmario::rootDir "c++.el"))
+;; (load-file (concat devmario::rootDir "rust.el"))
 
-(load-file (concat devmario::rootDir "coffeescript.el"))
-(load-file (concat devmario::rootDir "python.el"))
-(load-file (concat devmario::rootDir "ruby.el"))
-(load-file (concat devmario::rootDir "shellscript.el"))
+;; (load-file (concat devmario::rootDir "php.el"))
+;; (load-file (concat devmario::rootDir "html.el"))
+;; (load-file (concat devmario::rootDir "javascript.el"))
+;; (load-file (concat devmario::rootDir "css.el"))
 
-(load-file (concat devmario::rootDir "objective-c.el"))
-(load-file (concat devmario::rootDir "c#.el"))
+;; (load-file (concat devmario::rootDir "coffeescript.el"))
+;; (load-file (concat devmario::rootDir "python.el"))
+;; (load-file (concat devmario::rootDir "ruby.el"))
+;; (load-file (concat devmario::rootDir "shellscript.el"))
+
+;; (load-file (concat devmario::rootDir "objective-c.el"))
+;; (load-file (concat devmario::rootDir "c#.el"))
 
 ;; dev env
-(load-file (concat devmario::rootDir "rails.el"))
-(load-file (concat devmario::rootDir "sql-complete.el"))
-(load-file (concat devmario::rootDir "ios.el"))
+;; (load-file (concat devmario::rootDir "rails.el"))
+;; (load-file (concat devmario::rootDir "sql-complete.el"))
+;; (load-file (concat devmario::rootDir "ios.el"))
 
 ;; project
 
