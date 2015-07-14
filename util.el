@@ -1,10 +1,13 @@
+;; [유용한 링크] http://pages.sachachua.com/.emacs.d/Sacha.html
+;; http://sachachua.com/
+
 ;; magit only excute emacs version 24.4
 (if (version< emacs-version "24.4")
 	"24.4 부터만 magit 지원"
-    (progn (auto-install 'egg))
+  (progn (auto-install 'egg))
   (progn (auto-install 'magit)))
 
-(auto-install 'iedit 'neotree 'tabbar 'linum-relative 'sr-speedbar 'company 'projectile 'ido 'flylisp 'flx-ido 'flx 'ace-jump-mode 'browse-at-remote 'markdown-mode 'ir-black-theme)
+(auto-install 'iedit 'neotree 'tabbar 'linum-relative 'sr-speedbar 'company 'projectile 'ido 'flylisp 'flx-ido 'flx 'ace-jump-mode 'browse-at-remote 'markdown-mode 'ir-black-theme 'helm 'helm-swoop)
 
 ;; iedit
 (define-key global-map (kbd "C-c ;") 'iedit-mode)
@@ -60,6 +63,17 @@
 ;; ace-jump
 (define-key global-map (kbd "C-c SPC") 'ace-jump-mode)
 
+;; helm do grep
+;; https://github.com/emacs-helm/helm/wiki
+(eval-after-load 'helm-grep
+  '(setq helm-grep-default-command helm-grep-default-recurse-command))
+(define-key global-map (kbd "C-x g") 'helm-do-grep)
+
+;; helm swoop (find quick line)
+(define-key global-map (kbd "M-s M-s") 'helm-swoop)
+(define-key global-map (kbd "M-s M-a") 'helm-multi-swoop-all)
+(define-key global-map (kbd "M-s M-d") 'helm-multi-swoop)
+
 ;; 어두워서 안보여서 색상 바꿈
 ;; (set-face-foreground 'minibuffer-prompt "green")
 
@@ -70,3 +84,6 @@
 ;; (desktop-save-mode t)
 
 ;; (load-theme 'ir-black t)
+
+
+
