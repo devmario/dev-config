@@ -1,6 +1,5 @@
 (auto-install 'eshell 'exec-path-from-shell 'auto-complete)
 
-
 ;; exec-path-from-shell
 
 ;; This sets $MANPATH, $PATH and exec-path from your shell, but only on OS X.
