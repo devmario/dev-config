@@ -89,3 +89,15 @@
 ;; (erc-autojoin-enable)
 ;; (setq erc-autojoin-channels-alist '(("irc.freenote.net" "#chief-founder")))
 ;; (erc :server "52.69.162.111" :port "6667" :nick user-login-name :password "")
+
+;; http://www.emacswiki.org/emacs/SmoothScrolling
+(global-set-key (kbd "<mouse-4>") 'scroll-down-line)
+(global-set-key (kbd "<mouse-5>") 'scroll-up-line)
+
+;; redo
+(load-file (concat devmario::rootDir "redo.el"))
+(require 'redo)
+;; undo default C-_
+(global-set-key (kbd "C-M-_") 'redo)
+
+(message "done")

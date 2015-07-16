@@ -10,7 +10,7 @@
   (custom-set-faces
    ;; GUI
    `(minibuffer-prompt ((t (:foreground "green"))))
-   `(mode-line ((t (:background, *mode-line-bg* :foreground, "yellow"))))
+   `(mode-line ((t (:background, "yellow" :foreground, *mode-line-bg*))))
    `(vertical-border ((t (:background, *mode-line-bg* :foreground, "black"))))
 
    ;; ido flx

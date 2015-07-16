@@ -53,6 +53,9 @@
 ;; shell(eshell)
 (load-file (concat devmario::rootDir "shell.el"))
 
+;; org
+(load-file (concat devmario::rootDir "org.el"))
+
 ;; lang
 (load-file (concat devmario::rootDir "elisp.el"))
 
