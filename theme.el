@@ -1,4 +1,6 @@
-(auto-install 'ir-black-theme)
+(auto-install 'ir-black-theme 'powerline)
+
+(powerline-default-theme)
 
 (load-theme 'ir-black t)
 
@@ -11,7 +13,7 @@
    ;; GUI
    `(minibuffer-prompt ((t (:foreground "green"))))
    `(mode-line ((t (:background, "yellow" :foreground, *mode-line-bg*))))
-   `(vertical-border ((t (:background, *mode-line-bg* :foreground, "black"))))
+   `(vertical-border ((t (:background, *mode-line-bg* :foreground, *mode-line-bg*))))
 
    ;; ido flx
    `(flx-highlight-face ((t (:foreground, "brightred" :underline, t))))
