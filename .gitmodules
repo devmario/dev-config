@@ -1,0 +1,3 @@
+[submodule "bash-itunes"]
+	path = bash-itunes
+	url = https://github.com/devmario/bash-itunes

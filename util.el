@@ -80,7 +80,7 @@
 ;; 이거 if체크 필요
 ;; (blink-cursor-mode t)
 ;; (scroll-bar-mode t)
-;; (xterm-mouse-mode t)
+(xterm-mouse-mode t)
 ;; (desktop-save-mode t)
 
 ;; (load-theme 'ir-black t)
