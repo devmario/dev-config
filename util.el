@@ -100,4 +100,11 @@
 ;; undo default C-_
 (global-set-key (kbd "C-M-_") 'redo)
 
+;; reload process(but not wait killing process) : once try it => C-q C-c retrun, M-p return
+(defun devmario::eshell-reload-process()
+  (interactive)
+  (eshell-kill-process)
+  (eshell-previous-input 1)
+  (eshell-send-input))
+
 (message "done")
