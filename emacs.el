@@ -83,6 +83,8 @@
 ;; project
 
 
+;;(global-linum-mode t)
+
 ;; check emacs version
 (if (version< emacs-version "24.4")
     (progn (message "is before 24.4"))

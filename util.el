@@ -7,7 +7,7 @@
   (progn (auto-install 'egg))
   (progn (auto-install 'magit)))
 
-(auto-install 'iedit 'neotree 'tabbar 'linum-relative 'sr-speedbar 'company 'projectile 'ido 'flylisp 'flx-ido 'flx 'ace-jump-mode 'browse-at-remote 'ir-black-theme 'helm 'helm-swoop)
+(auto-install 'iedit 'neotree 'tabbar 'linum-relative 'sr-speedbar 'company 'projectile 'ido 'flylisp 'flx-ido 'flx 'ace-jump-mode 'browse-at-remote 'ir-black-theme 'helm 'helm-swoop 'hlinum)
 
 ;; iedit
 (define-key global-map (kbd "C-c ;") 'iedit-mode)
@@ -26,8 +26,10 @@
 (global-set-key (kbd "C-c <right>") 'tabbar-forward)
 
 ;; linum
+;; (require 'hlinum)
+;; (hlinum-activate)
 (global-set-key (kbd "C-c l l") 'linum-mode)
-(global-set-key (kbd "C-c l r") 'linum-relative-toggle)
+;; (global-set-key (kbd "C-c l r") 'linum-relative-toggle)
 
 ;; ido
 (require 'flx-ido)

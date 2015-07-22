@@ -25,6 +25,9 @@
    `(tabbar-modified ((t (:background, *tabbar-default-bg* :foreground, "#FF6C60"))))
    ;; `(tabbar-button ((t (:background, "#A245FF" :foreground, "#FF0"))))
 
+   ;; iedit
+   `(iedit-occurrence ((t (:foreground, "white" :background, "magenta"))))
+
    ;; neo tree
    `(neo-file-link-face ((t (:foreground, "#777"))))
    `(neo-dir-link-face ((t (:foreground, "#A245FF"))))
