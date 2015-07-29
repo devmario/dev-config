@@ -109,4 +109,12 @@
   (eshell-previous-input 1)
   (eshell-send-input))
 
+(setq devmario::eshell-num 0)
+
+(defun devmario::eshell()
+  (interactive)
+  (eshell)
+  (rename-buffer (format "eshell-%d" devmario::eshell-num))
+  (setq devmario::eshell-num (+ devmario::eshell-num 1)))
+
 (message "done")
