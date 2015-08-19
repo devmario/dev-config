@@ -26,9 +26,17 @@
 (package-initialize)
 
 ;; include root(mac, linux)
-(if (equal system-type 'darwin)
-	(setq devmario::rootDir "~/Documents/dev-config/")
-  (setq devmario::rootDir "~/dev-config/"))
+;; check OS type
+(cond
+ ((string-equal system-type "windows-nt") ; Microsoft Windows
+  (progn
+    (message "Microsoft Windows")))
+ ((string-equal system-type "darwin") ; Mac OS X
+  (progn
+	(setq devmario::rootDir "~/Documents/dev-config/")))
+ ((string-equal system-type "gnu/linux") ; linux
+  (progn
+    (setq devmario::rootDir "~/dev-config/"))))
 
 ;; include
 (defun auto-install (&rest i)
@@ -59,7 +67,8 @@
 ;; lang
 (load-file (concat devmario::rootDir "elisp.el"))
 
-;; (load-file (concat devmario::rootDir "c++.el"))
+(load-file (concat devmario::rootDir "survive.el"))
+;;(load-file (concat devmario::rootDir "c++.el"))
 ;; (load-file (concat devmario::rootDir "rust.el"))
 
 ;; (load-file (concat devmario::rootDir "php.el"))
@@ -98,17 +107,6 @@
     (progn (message "is 24.4 or after"))
   (progn (message "is before 24.4")))
 
-;; check OS type
-(cond
- ((string-equal system-type "windows-nt") ; Microsoft Windows
-  (progn
-    (message "Microsoft Windows")))
- ((string-equal system-type "darwin") ; Mac OS X
-  (progn
-    (message "Mac OS X")))
- ((string-equal system-type "gnu/linux") ; linux
-  (progn
-    (message "Linux"))))
 
 ;; done
 (message "Devmario's Emacs enviropment load up finished!")

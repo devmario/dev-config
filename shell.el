@@ -36,10 +36,10 @@
 						  file-name-handler-alist) file-name-handler-alist))
 	ad-do-it))
 
-;; (setq eshell-prompt-function
-;; 	  (lambda ()
-;; 		(concat "[" (user-login-name) "@" (system-name) " " (eshell/pwd) "]"
-;; 				(if (= (user-uid) 0) "# " "$ "))))
+(setq eshell-prompt-function
+ 	  (lambda ()
+ 		(concat "" (eshell/pwd) " "
+ 				(if (= (user-uid) 0) "# " "$ "))))
 
 ;; (setq eshell-prompt-function
 ;;	  (lambda ()
@@ -52,6 +52,7 @@
 		  '(lambda () (define-key eshell-mode-map "\t" 'pcomplete-list)))
 
 (setq eshell-cmpl-cycle-completions nil)
+
 
 ;; TODO 명령어 중간에 '치고 다른거치고'닫은 곳에 커서가서 치면 에러남
 ;; TODO emacs24.3 cl-flet to flet

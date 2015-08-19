@@ -1,8 +1,8 @@
 (auto-install 'ir-black-theme 'powerline)
 
-(powerline-default-theme)
+;;(powerline-default-theme)
 
-(load-theme 'ir-black t)
+;;(load-theme 'ir-black t)
 
 (let ((*mode-line-bg* "#202020")
 	  (*mode-line-fg* "#CCC")
@@ -12,8 +12,8 @@
   (custom-set-faces
    ;; GUI
    `(minibuffer-prompt ((t (:foreground "green"))))
-   `(mode-line ((t (:background, "yellow" :foreground, *mode-line-bg*))))
-   `(vertical-border ((t (:background, *mode-line-bg* :foreground, *mode-line-bg*))))
+   ;; `(mode-line ((t (:background, "yellow" :foreground, *mode-line-bg*))))
+   ;; `(vertical-border ((t (:background, *mode-line-bg* :foreground, *mode-line-bg*))))
 
    ;; ido flx
    `(flx-highlight-face ((t (:foreground, "brightred" :underline, t))))
@@ -36,8 +36,10 @@
    `(neo-root-dir-face ((t (:foreground, "yellow"))))
    `(neo-header-face ((t (:foreground, "brightblue"))))
 
+   ;; `(eshell-prompt ((t (:foreground, "#A245FF"))))
+
    ;; speedbar
-   `(speedbar-directory-face ((t (:foreground, "#A245FF"))))
+   ;; `(speedbar-directory-face ((t (:foreground, "#A245FF"))))
 
    ;; font-lock
    `(font-lock-function-name-face ((t (:foreground "green"))))))
@@ -60,7 +62,7 @@ That is, a string used to represent it on the tab bar."
 								(tabbar-current-tabset)))))))))
 
 ;; menu bar hide
-(menu-bar-mode -1)
+;;(menu-bar-mode -1)
 
 (setq-default show-trailing-whitespace nil)
 (setq-default indent-tabs-mode t)
