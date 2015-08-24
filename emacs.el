@@ -67,7 +67,8 @@
 ;; lang
 (load-file (concat devmario::rootDir "elisp.el"))
 
-(load-file (concat devmario::rootDir "survive.el"))
+;;(load-file (concat devmario::rootDir "survive.el"))
+(load-file (concat devmario::rootDir "myletter.el"))
 ;;(load-file (concat devmario::rootDir "c++.el"))
 ;; (load-file (concat devmario::rootDir "rust.el"))
 
