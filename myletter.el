@@ -105,3 +105,28 @@
 
 (auto-install 'csharp-mode)
 (add-to-list 'auto-mode-alist '("\\.uno\\'" . csharp-mode))
+
+(add-to-list 'grep-find-ignored-files "*.uxl")
+(add-to-list 'grep-find-ignored-files "CPlusPlus")
+(add-to-list 'grep-find-ignored-files "lib")
+(eval-after-load 'helm-grep
+  '(setq helm-grep-default-command helm-grep-default-recurse-command))
+(defun uno-grep ()
+  (interactive)
+  (helm-do-grep-1 '("/usr/share/uno/Packages") t nil '("*.uno")))
+
+
+(add-to-list 'flycheck-checkers 'swift)
+
+(add-to-list 'ac-dictionary-directories "~/.emacs.d/ac-dict")
+(unless (file-exists-p "~/.emacs.d/ac-dict/swift-mode")
+  (url-copy-file "https://raw.githubusercontent.com/andelf/Defines-Swift/master/misc/swift-mode"
+				 "~/.emacs.d/ac-dict/swift-mode"))
+
+(add-hook 'swift-mode-hook
+		  #'(lambda ()
+			  (auto-complete-mode t)
+			  (add-to-list 'ac-sources 'ac-source-files-in-current-dir)
+			  (electric-pair-mode t)
+			  (add-to-list 'ac-sources 'ac-source-dictionary)
+			  ))
