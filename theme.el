@@ -1,8 +1,8 @@
 (auto-install 'ir-black-theme 'powerline)
 
-;;(powerline-default-theme)
+(powerline-default-theme)
 
-;;(load-theme 'ir-black t)
+(load-theme 'ir-black t)
 
 (let ((*mode-line-bg* "#202020")
 	  (*mode-line-fg* "#CCC")
@@ -12,8 +12,8 @@
   (custom-set-faces
    ;; GUI
    `(minibuffer-prompt ((t (:foreground "green"))))
-   ;; `(mode-line ((t (:background, "yellow" :foreground, *mode-line-bg*))))
-   ;; `(vertical-border ((t (:background, *mode-line-bg* :foreground, *mode-line-bg*))))
+   `(mode-line ((t (:background, "yellow" :foreground, *mode-line-bg*))))
+   `(vertical-border ((t (:background, *mode-line-bg* :foreground, *mode-line-bg*))))
 
    ;; ido flx
    `(flx-highlight-face ((t (:foreground, "brightred" :underline, t))))
@@ -23,7 +23,7 @@
    `(tabbar-selected ((t (:background, "#96CBFE" :foreground, *tabbar-default-bg*))))
    `(tabbar-unselected ((t (:background, *tabbar-default-bg* :foreground, *tabbar-default-fg*))))
    `(tabbar-modified ((t (:background, *tabbar-default-bg* :foreground, "#FF6C60"))))
-   ;; `(tabbar-button ((t (:background, "#A245FF" :foreground, "#FF0"))))
+   `(tabbar-button ((t (:background, "#A245FF" :foreground, "#FF0"))))
 
    ;; iedit
    `(iedit-occurrence ((t (:foreground, "white" :background, "magenta"))))
@@ -35,11 +35,12 @@
    `(neo-expand-btn-face ((t (:foreground, "#00FFFF"))))
    `(neo-root-dir-face ((t (:foreground, "yellow"))))
    `(neo-header-face ((t (:foreground, "brightblue"))))
+   `(highlight-current-line-face ((t (:background, "gray10"))))
 
-   ;; `(eshell-prompt ((t (:foreground, "#A245FF"))))
+   `(eshell-prompt ((t (:foreground, "#A245FF"))))
 
    ;; speedbar
-   ;; `(speedbar-directory-face ((t (:foreground, "#A245FF"))))
+   `(speedbar-directory-face ((t (:foreground, "#A245FF"))))
 
    ;; font-lock
    `(font-lock-function-name-face ((t (:foreground "green"))))))
@@ -66,3 +67,7 @@ That is, a string used to represent it on the tab bar."
 
 (setq-default show-trailing-whitespace nil)
 (setq-default indent-tabs-mode t)
+
+(highlight-current-line-minor-mode t)
+(highlight-current-line-on t)
+(global-linum-mode t)
