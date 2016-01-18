@@ -113,7 +113,7 @@
   '(setq helm-grep-default-command helm-grep-default-recurse-command))
 (defun uno-grep ()
   (interactive)
-  (helm-do-grep-1 '("/usr/share/uno/Packages") t nil '("*.uno")))
+  (helm-do-grep-1 '("/usr/local/share/uno/Packages") t nil '("*.uno")))
 
 
 (add-to-list 'flycheck-checkers 'swift)

@@ -2,7 +2,7 @@
 
 ;; (powerline-default-theme)
 
-;;(load-theme 'ir-black t)
+(load-theme 'ir-black t)
 
 (let ((*mode-line-bg* "#202020")
 	  (*mode-line-fg* "#CCC")
@@ -35,11 +35,12 @@
    `(neo-expand-btn-face ((t (:foreground, "#00FFFF"))))
    `(neo-root-dir-face ((t (:foreground, "yellow"))))
    `(neo-header-face ((t (:foreground, "brightblue"))))
+   `(highlight-current-line-face ((t (:background, "gray10"))))
 
    `(eshell-prompt ((t (:foreground, "#A245FF"))))
 
    ;; speedbar
-   ;; `(speedbar-directory-face ((t (:foreground, "#A245FF"))))
+   `(speedbar-directory-face ((t (:foreground, "#A245FF"))))
 
    ;; font-lock
    `(font-lock-function-name-face ((t (:foreground "green"))))))
@@ -66,3 +67,7 @@ That is, a string used to represent it on the tab bar."
 
 (setq-default show-trailing-whitespace nil)
 (setq-default indent-tabs-mode t)
+
+(highlight-current-line-minor-mode t)
+(highlight-current-line-on t)
+(global-linum-mode t)
