@@ -1,0 +1,34 @@
+#!/bin/bash
+
+help() {
+    echo "-i input directory"
+    echo "-o output directory"
+    echo "-f filetype wildcard"
+    echo "-d old charset"
+    echo "-n new charset"
+    exit 0
+}
+while getopts "i:o:f:d:n:h" opt
+do
+    case $opt in
+        i) input=$OPTARG ;;
+        o) output=$OPTARG ;;
+        f) filetype=$OPTARG ;;
+		d) oldchar=$OPTARG ;;
+		n) newchar=$OPTARG ;;
+        h) help ;;
+    esac
+done
+
+echo "$oldchar > $newchar"
+echo ""
+
+for i in $input/*.$filetype; do
+	f="${i##*/}"
+	iconv -c -f $oldchar -t $newchar $input/$f -o $output/$f
+	echo "$input/$f > $output/$f"
+done;
+
+echo ""
+echo "done!"
+
