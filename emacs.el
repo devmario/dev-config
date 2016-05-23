@@ -50,12 +50,15 @@
 ;; not partial package
 ;; (auto-install 'rust-mode 'flymake-rust 'ac-html 'haml-mode 'flymake-haml 'coffee-mode 'jquery-doc 'css-mode 'web-mode 'flymake-coffee)
 
+(auto-install 'yafolding)
+(define-key yafolding-mode-map (kbd "C-x y") 'yafolding-toggle-element)
+
 ;; util
 (load-file (concat devmario::rootDir "util.el"))
 
 (load-file (concat devmario::rootDir "theme.el"))
 
-;; auto-complete config
+;; auto-complete confi
 (load-file (concat devmario::rootDir "auto-complete.el"))
 
 ;; shell(eshell)

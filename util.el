@@ -19,7 +19,7 @@
 (global-set-key (kbd "C-x <right>") 'windmove-right)
 
 ;; tabbar
-(tabbar-mode t)
+(tabbar-mode 0)
 (global-set-key (kbd "C-c g <left>") 'tabbar-backward-group)
 (global-set-key (kbd "C-c g <right>") 'tabbar-forward-group)
 (global-set-key (kbd "C-c <left>") 'tabbar-backward)
@@ -58,6 +58,10 @@
 	 (ido-completing-read
 	  "M-x "
 	  (all-completions "" obarray 'commandp))))))
+
+(global-set-key (kbd "M-x") 'helm-M-x)
+(global-set-key (kbd "C-x C-f") 'helm-find-files)
+(global-set-key (kbd "C-x b") 'helm-buffers-list)
 
 ;; tab width
 (setq-default tab-width 4)
