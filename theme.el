@@ -67,7 +67,35 @@
 
 (setq-default show-trailing-whitespace nil)
 (setq-default indent-tabs-mode t)
-
+(auto-install 'highlight-current-line 'color-theme)
 (highlight-current-line-minor-mode t)
 (highlight-current-line-on t)
 (global-linum-mode 0)
+
+(load-theme 'misterioso)
+
+(custom-set-faces
+ ;; custom-set-faces was added by Custom.
+ ;; If you edit it by hand, you could mess it up, so be careful.
+ ;; Your init file should contain only one such instance.
+ ;; If there is more than one, they won't work right.
+ '(eshell-prompt ((t (:foreground "#A245FF"))))
+ '(flx-highlight-face ((t (:foreground "brightred" :underline t))))
+ '(font-lock-function-name-face ((t (:foreground "green"))))
+ '(highlight-current-line-face ((t (:background "gray10"))))
+ '(iedit-occurrence ((t (:foreground "white" :background "magenta"))))
+ '(minibuffer-prompt ((t (:foreground "green"))))
+ '(mode-line ((t (:background "yellow" :foreground "#202020"))))
+ '(neo-banner-face ((t (:foreground "brightred"))))
+ '(neo-dir-link-face ((t (:foreground "#A245FF"))))
+ '(neo-expand-btn-face ((t (:foreground "#00FFFF"))))
+ '(neo-file-link-face ((t (:foreground "#777"))))
+ '(neo-header-face ((t (:foreground "brightblue"))))
+ '(neo-root-dir-face ((t (:foreground "yellow"))))
+ '(speedbar-directory-face ((t (:foreground "#A245FF"))))
+ '(tabbar-button ((t (:background "#A245FF" :foreground "#FF0"))))
+ '(tabbar-default ((t (:background "#333" :foreground "#777"))))
+ '(tabbar-modified ((t (:background "#333" :foreground "#FF6C60"))))
+ '(tabbar-selected ((t (:background "#96CBFE" :foreground "#333"))))
+ '(tabbar-unselected ((t (:background "#333" :foreground "#777"))))
+ '(vertical-border ((t (:background "#202020" :foreground "#202020")))))
