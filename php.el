@@ -1,6 +1,7 @@
 
-(auto-install 'php-mode 'web-mode)
+(auto-install 'php-mode 'web-mode 'jade-mode)
 
+(add-to-list 'auto-mode-alist '("\\.jade$" . jade-mode))
 (add-to-list 'auto-mode-alist '("\\.php$" . web-mode))
 (add-to-list 'auto-mode-alist '("\\.inc$" . php-mode))
 (defun web-mode-additional ()
