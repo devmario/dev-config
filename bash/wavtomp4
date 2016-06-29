@@ -1,0 +1,17 @@
+#!/bin/bash
+
+cd $1
+
+for i in $(ls *.mp4); do
+	filename=$(basename "$i")
+	ext="${filename##*.}"
+	name="${filename%.*}"
+	afconvert -f mp4f -d aac -b 32000 $i output/$name.mp4
+	#afconvert -f mp4f -d aac -b 32000 $i output/$name.mp3
+	echo "afconvert : $filename => $name.mp3"
+done
+
+echo "done"
+
+
+#sips -s format jpeg -s formatOptions 80 *.png --out jpeg

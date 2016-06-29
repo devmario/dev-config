@@ -1,0 +1,30 @@
+#!/bin/bash
+
+# namesort dir prefix filetype startnumber reverse format
+# namesort tmp img jpg 1 false %03d
+
+echo "command '$0'"
+echo "dir '$1'"
+echo "prefix '$2'"
+echo "type '$3'"
+echo "start num '$4'"
+echo "reverse '$5'"
+echo "format '$6'"
+cur=`pwd`
+echo "-----"
+cd $1
+num=$4
+for i in `ls *.$3`
+do
+	echo -n "."
+	mv $i $2$(printf $6 $num).$3
+	if [ "$5" == "true" ]; then
+		((num--))
+	else
+		((num++))
+	fi
+done
+echo "."
+cd $cur
+echo "done"
+#for i in {1..108};do;mv ~/Desktop/tmp/$i.jpg ~/Desktop/tmp/$(printf %03d $i).jpg;done;
